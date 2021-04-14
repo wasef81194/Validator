@@ -6,7 +6,7 @@
  * @return : les erreurs de la pages donner
  */
 //namespace Error;
-class ErrorHTML{
+class ErrorHTML {
 
 	private $type;
 	private $message;
@@ -38,6 +38,9 @@ class ErrorHTML{
 	public function GetExtract(){
 			return $this->extract;
 	}
+	public function GetLasttLine(){
+			return $this->lastLine;
+	}
 
 	public function GetFirstLine(){
 			return $this->firstLine;
@@ -47,7 +50,7 @@ class ErrorHTML{
 			return $this->lastColumn;
 	}
 	public function GetFirstColumn(){
-			return $this->type;
+			return $this->firstColumn;
 	}
 	/*public function Exist(string $DebutMessage, $element, sting $FinMessage)
 	{

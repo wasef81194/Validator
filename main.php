@@ -27,7 +27,7 @@
 	//echo $number;
 
 	// Affiche les erreur html de la page  http://yourgame.alwaysdata.net
-	echo "<p><b>La page à corriger : </b>".$data["url"]."</p><p>The CSS <code>background-color</code> property defines the background color of an element.</p>";
+	echo "<p><b>La page à corriger : </b>".$data["url"]."</p>";
 
 	//echo $data["messages"][1]['type'];
 
