@@ -24,7 +24,7 @@ class URLS{
 		return $urlValid;
 	}
 	public function GetURLValidatorCSS(){
-		$urlValid = " https://jigsaw.w3.org/css-validator/validator?uri=".$this->url."&output=json";
+		$urlValid = "https://jigsaw.w3.org/css-validator/validator?uri=".$this->url."&output=json";
 		return $urlValid;
 	}
 

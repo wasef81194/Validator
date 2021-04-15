@@ -66,20 +66,21 @@ class ErrorHTML extends TypeErreur{
         //$out .= "<p>Type d'erreur : ". $this->type ."</p>";
         $out .= "<p>Message : ". $this->message ."</p>";
         if (!empty($this->extract)) {
-        $out .= "<p>Extrait  : ". $this->extract. "</p>";
+        $out .= "<p>Extrait  : <code>". $this->extract. "</code></p>";
         }
-      	elseif (!empty($this->lastLine)) {
+      	if (!empty($this->lastLine)) {
       		$out .= "<p>Dernière Ligne : ". $this->lastLine ."</p>" ;// a dernière ligne (incluse) sur laquelle tombe la plage source associée au message.
       	}
-      	elseif ($this->firstLine) {
+      	if (!empty($this->firstLine)) {
       		$out .= "<p>Première Ligne : ".$this->firstLine."</p>";//indique la première ligne sur laquelle tombe la plage source associée au message
       	}
-      	elseif ($this->lastColumn) {
+      	if (!empty($this->lastColumn)) {
       		$out .= "<p>Dernière Colonne : ".$this->lastColumn."</p>";// indique la dernière colonne (incluse) sur laquelle la plage source associée au message tombe sur la dernière ligne sur laquelle se trouve.
       	}
-      	elseif ($this->firstColumn) {
+      	if (!empty($this->firstColumn)) {
       		$out .= "<p>Première Colonne : ".$this->firstColumn."</p>";// indique la première colonne sur laquelle tombe la plage source associée au message sur la première ligne sur laquelle tombe.*/
       	}
+      	$out .= "</code>";
         return $out;
     }
 
