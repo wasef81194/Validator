@@ -19,8 +19,12 @@ class URLS{
 			return $this->url;
 	}
 
-	public function GetURLValidator(){
+	public function GetURLValidatorHTML(){
 		$urlValid = "https://validator.w3.org/nu/?doc=".$this->url."&out=json";
+		return $urlValid;
+	}
+	public function GetURLValidatorCSS(){
+		$urlValid = " https://jigsaw.w3.org/css-validator/validator?uri=".$this->url."&output=json";
 		return $urlValid;
 	}
 
