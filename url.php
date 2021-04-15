@@ -5,8 +5,8 @@
  * @param : URL du site à corriger
  * @return : le nom de l'url
  */
-//namespace Error;
-class URL{
+
+class URLS{
 
 	private $url;
 
@@ -19,9 +19,14 @@ class URL{
 			return $this->url;
 	}
 
+	public function GetURLValidator(){
+		$urlValid = "https://validator.w3.org/nu/?doc=".$this->url."&out=json";
+		return $urlValid;
+	}
+
 	public function __toString(){
         $out  = "<------------------URL-----------------><br>";
-        $out .= "<p> URL : ". $this->type ."</p>";
+        $out .= "<p> URL : ". $this->url ."</p>";
         return $out;
     }
 

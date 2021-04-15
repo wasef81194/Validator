@@ -4,9 +4,13 @@
 	include_once 'errorhtml.php';
 	include_once 'typeerror.php';
 
+	include_once 'url.php';
+
    //Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net
 
-	$url = "https://validator.w3.org/nu/?doc=http://yourgame.alwaysdata.net/inscription.php&out=json";
+	$URLS = New URLS('http://yourgame.alwaysdata.net/inscription.php');
+
+	$url = $URLS->GetURLValidator();
 
 	$options = array(
 	  'http'=>array(
@@ -17,13 +21,13 @@
 	  )
 	);
 	// reprise du code de l'ancien projet permettant de retrouerner l'url s'éléctionner JSON en Tableau
-
 	$context = stream_context_create($options);
 	$recup_data = file_get_contents($url, false, $context);
 
 	$data = json_decode($recup_data ,true);// Récupre les donnnées json en php
 
 	$number = count($data["messages"]);
+
 
 	// Affiche les erreur html de la page  http://yourgame.alwaysdata.net
 	echo "<p><b>La page à corriger : </b>".$data["url"]."</p>";
