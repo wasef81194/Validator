@@ -1,14 +1,13 @@
 <?php
-
+include_once 'typeerror.php';
 /**
  * Erreur HTML de l'API validator.w3.org
  * @param : type message extrait permeiere et derniere ligne premierer et dernières colones
  * @return : les erreurs de la pages donner
  */
 //namespace Error;
-class ErrorHTML {
+class ErrorHTML extends TypeErreur{
 
-	private $type;
 	private $message;
 	private $extract;
 	private $lastLine;
@@ -18,7 +17,7 @@ class ErrorHTML {
 
 	public function __construct(string $type, string $message, string $extract,  $lastLine,  $firstLine, $lastColumn,  $firstColumn){
 
-		$this->type = $type;
+        parent::__construct($type);
 		$this->message = $message;
 		$this->extract = $extract;
 		$this->lastLine = $lastLine;
@@ -28,7 +27,7 @@ class ErrorHTML {
 
 	}
 	public function GetType(){
-			return $this->type;
+			return parent::GetType();
 	}
 
 	public function GetMessage(){
@@ -61,9 +60,11 @@ class ErrorHTML {
 	}*/
 
 	public function __toString(){
-        $out  = "<------------------Erreur dans le code HTML-----------------><br>";
-        $out .= "<p>Type d'erreur : ". $this->type ."</p>";
-        $out .= "<p>Message d'erreur : ". $this->message ."</p>";
+
+        $out = parent::__toString();
+        $out  .= "<br><------------------Dans le code HTML-----------------><br>";
+        //$out .= "<p>Type d'erreur : ". $this->type ."</p>";
+        $out .= "<p>Message : ". $this->message ."</p>";
         if (!empty($this->extract)) {
         $out .= "<p>Extrait  : ". $this->extract. "</p>";
         }

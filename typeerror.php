@@ -5,7 +5,7 @@
  * @param : type  d'erreur 
  * @return : : erreur,info...
  */
-class Error{
+class TypeErreur{
 
 	public $type;
 
