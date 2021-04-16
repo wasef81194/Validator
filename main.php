@@ -9,7 +9,7 @@
 
 	//---------------------------------------------------------------------------------------------------CSS--------------------------------------------------------------------------------------------
 
-	$URLS = New URLS('http://yourgame.alwaysdata.net/inscription.php');
+	$URLS = New URLS('http://mygame.alwaysdata.net');
 	
 	echo "<h2><b>La page à corriger : </b>". $URLS->GetURL()."</h2>";
 
