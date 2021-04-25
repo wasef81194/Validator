@@ -58,7 +58,6 @@
 		
 
 		$APIHTML = $URLS->GetURLValidatorHTML();
-		echo $APIHTML;
 		$options = array(
 		  'http'=>array(
 		    'method'=>"GET",
@@ -98,10 +97,6 @@
 
 
 	}
-
-	
-
-
 
 
 
