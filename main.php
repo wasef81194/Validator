@@ -6,11 +6,10 @@
 	include_once 'typeerror.php';
 	include_once 'url.php';
 	include_once 'warningcss.php';
-	include_once 'test.php';
+	include_once 'function.php';
 
 
-	
-	$url = 'http://wasef.alwaysdata.net/';
+	$url = 'http://mygame.alwaysdata.net/';
 	$Taburl = getTabUrl($url);
 	//var_dump($Taburl);
 	for ($x=0; $x < CountTabUrl($url) ; $x++) { 
@@ -53,18 +52,13 @@
 		}
 
 
-
-	}
-
-	
-
-	/*	//-------------------------------------------------------------------------------------------------------HTML--------------------------------------------------------------------------------------------------
+		//-------------------------------------------------------------------------------------------------------HTML--------------------------------------------------------------------------------------------------
 	   	//Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net-
 
 		
 
-		$url = $URLS->GetURLValidatorHTML();
-
+		$APIHTML = $URLS->GetURLValidatorHTML();
+		echo $APIHTML;
 		$options = array(
 		  'http'=>array(
 		    'method'=>"GET",
@@ -75,7 +69,7 @@
 		);
 		// reprise du code de l'ancien projet permettant de retrouerner l'url s'éléctionner JSON en Tableau
 		$context = stream_context_create($options);
-		$recup_data = file_get_contents($url, false, $context);
+		$recup_data = file_get_contents($APIHTML, false, $context);
 
 		$data = json_decode($recup_data ,true);// Récupre les donnnées json en php
 
@@ -94,13 +88,21 @@
 			$lastColumn =  $data["messages"][$f]['lastColumn'];
 			$firstColumn = $data["messages"][$f]['firstColumn'];
 
-			$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
+			$ErrorHTML = New ErrorHTML($type,$message,/*extract*/'Extrait',$lastLine,$firstLine,$lastColumn,$firstColumn);
 
 		
 			echo $ErrorHTML;
 
 		}
 
-*/
+
+
+	}
+
+	
+
+
+
+
 
  ?>
