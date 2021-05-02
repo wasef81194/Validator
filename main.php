@@ -1,20 +1,31 @@
-
 <?php 
-
+	//include_once 'nav.php';
 	include_once 'errorhtml.php';
 	include_once 'errorcss.php';
 	include_once 'typeerror.php';
 	include_once 'url.php';
 	include_once 'warningcss.php';
 	include_once 'function.php';
+	include_once 'formvalidator.php';
 
+ //----------------------------------------------------------------------------------------------
+	echo Nav(); //Menu de navigation
+	echo FormValidator();// Formulaire de validiation de site
+	if ($_POST["formtype"] == "validator") {
+	$FormValidator = New FormValidator($_POST["formtype"],$_POST["url"]);// Appel de la class
+	$url = $FormValidator->GetUrl();//utilisation de ces fonctions
+	$FormCheck = $FormValidator->CehckForm();//utilisation de ces fonctions
+	}
+	if($FormCheck != 'TRUE'){
+		echo $FormCheck;// si l'url n'est pas valide cela affiche un message d'erreur 
+	}
+	else{//si non l'API corrige les pages
 
-	$url = 'http://mygame.alwaysdata.net/';
+	//$url = 'http://mygame.alwaysdata.net/';
 	$Taburl = getTabUrl($url);
 	//var_dump($Taburl);
 	for ($x=0; $x < CountTabUrl($url) ; $x++) { 
 		$urls = $Taburl[$x];
-		//echo $urls;
 
 		$URLS = New URLS($urls);
 		
@@ -97,6 +108,8 @@
 
 
 	}
+}
+	echo Footer();
 
 
 

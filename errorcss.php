@@ -21,6 +21,17 @@ class ErrorCSS extends WarningCSS{
 	public function GetContext(){
 			return $this->context;
 	}
+	public function GetType(){
+			return parent::GetType();
+	}
+
+	public function GetMessage(){
+			return parent::GetMessage();
+	}
+
+	public function GetLine(){
+			return parent::GetLine();
+	}
 
 	public function __toString(){
 

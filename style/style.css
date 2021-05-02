@@ -1,0 +1,68 @@
+
+ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: #333;
+	}
+
+	li {
+	  float: left;
+	}
+
+	li a {
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+
+	li a:hover:not(.active) {
+	  background-color: #111;
+	}
+
+	.active {
+	  background-color: #4CAF50;
+	}
+
+h1{
+	text-align: center;
+}
+
+footer{
+
+height:50px;
+font-weight: bold;
+
+}
+#url{
+  width: 75%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#ButtonValid{
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#ButtonValid:hover {
+  background-color: #45a049;
+}
+label {
+
+	font-weight: bold;
+	font-size: 26px;
+ 	padding: 12px 12px 12px 0;
+	display: inline-block;
+}
