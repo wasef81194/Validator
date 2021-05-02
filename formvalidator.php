@@ -2,9 +2,9 @@
 
 include_once 'url.php';
 /**
- * Erreur HTML de l'API validator.w3.org
- * @param : yrl à vailder 
- * @return : url
+ * Erreur Dans le formulaire
+ * @param : Type de formulaire
+ * @return : Message d'erreur si l'url n'est pas saisie correctement
  */
 class FormValidator extends URLS{
 

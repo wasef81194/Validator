@@ -7,7 +7,7 @@
  */
 class TypeErreur{
 
-	public $type;
+	private $type;
 
 	public function __construct(string $type){	
 		$this->type = $type;
