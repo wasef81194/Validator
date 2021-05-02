@@ -19,7 +19,14 @@ function getTabUrl($url){
 	{
 		$parse = parse_url($match);
 		if ($parse['host'] == '') {
-			$urls = $url;
+			$lastChar = substr($url, -1);
+			if ($lastChar =='/') {
+				$urls = $url;
+			}
+			else{
+				$urls = $url.'/';
+			}
+			
 		}
 		else{
 			$urls = '';

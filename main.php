@@ -24,6 +24,8 @@
 	//$url = 'http://mygame.alwaysdata.net/';
 	$Taburl = getTabUrl($url);
 	//var_dump($Taburl);
+ 	
+ 	echo $lastChar;
 	for ($x=0; $x < CountTabUrl($url) ; $x++) { 
 		$urls = $Taburl[$x];
 
