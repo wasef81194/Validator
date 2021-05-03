@@ -18,6 +18,15 @@ class FormValidator extends URLS{
 	public function GetURL(){
 		return parent::GetURL();
 	}
+	public function GetURLValidatorHTML(){
+		return parent::GetURLValidatorHTML();
+	}
+	public function GetURLValidatorCSS(){
+		return parent::GetURLValidatorCSS();
+	}
+	public function ValideURL(){//verifie que le lien n'est pas une image
+		return parent::ValideURL();
+	}
 
  	public function CehckForm(){
 		if ($this->formtype == "validator") {

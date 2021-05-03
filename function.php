@@ -17,8 +17,8 @@ function getTabUrl($url){
 
 	foreach($matches[1] as $match)
 	{
-		$parse = parse_url($match);
-		if ($parse['host'] == '') {
+		$parse2 = parse_url($match);
+		if ($parse2['host'] == '') {
 			$lastChar = substr($url, -1);
 			if ($lastChar =='/') {
 				$urls = $url;
@@ -26,14 +26,18 @@ function getTabUrl($url){
 			else{
 				$urls = $url.'/';
 			}
-			
 		}
 		else{
 			$urls = '';
 		}
 		
 		$urls .= $match;
-		array_push($taburl,$urls); //ajoute les urls rejoint sur la page 
+		$parse3 = parse_url($urls);
+		if (!in_array($urls, $taburl)) {//si le lien n'xiste pas déja
+			if ($parse3['host']==$parse['host']) {//verifie que le nom d'hote sont les même pour pas tomber sur des pages qui n'ont pas le meme nom de domain
+				array_push($taburl,$urls); //ajoute les urls rejoint sur la page 
+			}
+		}
 		$urls ='';
 	}
 	//var_dump($taburl);
@@ -76,7 +80,7 @@ function Footer(){
 }
 
 function FormValidator(){
-	$form = '<form action="main.php" method="post">
+	$form = '<form action="index.php" method="post">
 	<h2>Valide ton site</h2>
 	<label>Entrez l\'url de votre site :</label>
     <input type="text" placeholder="https://example.com" name="url" id="url" required/> 

@@ -10,6 +10,7 @@ class WarningCSS extends TypeErreur{
 
 	private $line;
 	private $message;
+	
 	public function __construct(int $line, string $type,  string $message){
 
         parent::__construct($type);
