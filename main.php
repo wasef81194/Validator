@@ -100,7 +100,7 @@
 			$lastColumn =  $data["messages"][$f]['lastColumn'];
 			$firstColumn = $data["messages"][$f]['firstColumn'];
 
-			$ErrorHTML = New ErrorHTML($type,$message,/*extract*/'Extrait',$lastLine,$firstLine,$lastColumn,$firstColumn);
+			$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
 
 		
 			echo $ErrorHTML;

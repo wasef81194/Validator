@@ -66,7 +66,7 @@ class ErrorHTML extends TypeErreur{
         //$out .= "<p>Type d'erreur : ". $this->type ."</p>";
         $out .= "<p>Message : ". $this->message ."</p>";
         if (!empty($this->extract)) {
-        $out .= "<p>Extrait  : <code>". $this->extract. "</code></p>";
+        $out .= "<p>Extrait  : <xmp>".$this->extract. "</xmp></p>";
         }
       	if (!empty($this->lastLine)) {
       		$out .= "<p>Dernière Ligne : ". $this->lastLine ."</p>" ;// a dernière ligne (incluse) sur laquelle tombe la plage source associée au message.
