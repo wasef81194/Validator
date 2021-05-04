@@ -1,5 +1,5 @@
 <?php
-include_once 'typeerror.php';
+include_once './class/validator/typeerror.php';
 /**
  * Erreur CSS de l'API validator.w3.org
  * @param : line context type message

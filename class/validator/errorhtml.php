@@ -1,5 +1,5 @@
 <?php
-include_once 'typeerror.php';
+include_once './class/validator/typeerror.php';
 /**
  * Erreur HTML de l'API validator.w3.org
  * @param : type message extrait permeiere et derniere ligne premierer et dernières colones

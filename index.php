@@ -1,12 +1,12 @@
 <?php 
 	//include_once 'nav.php';
-	include_once 'errorhtml.php';
-	include_once 'errorcss.php';
-	include_once 'typeerror.php';
-	include_once 'url.php';
-	include_once 'warningcss.php';
+	include_once './class/validator/errorhtml.php';
+	include_once './class/validator/errorcss.php';
+	include_once './class/validator/typeerror.php';
+	include_once './class/validator/url.php';
+	include_once './class/validator/warningcss.php';
 	include_once 'function.php';
-	include_once 'formvalidator.php';
+	include_once './class/validator/formvalidator.php';
 
  //----------------------------------------------------------------------------------------------
 	echo Nav(); //Menu de navigation
@@ -106,4 +106,3 @@
 
 
  ?>
- 

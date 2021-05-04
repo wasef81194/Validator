@@ -1,6 +1,6 @@
 <?php
-include_once 'typeerror.php';
-include_once 'warningcss.php';
+include_once './class/validator/typeerror.php';
+include_once './class/validator/warningcss.php';
 
 /**
  * Erreur CSS de l'API validator.w3.org
