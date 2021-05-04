@@ -54,7 +54,7 @@
 
 					$ErrorCSS = New ErrorCSS($line,$context,$type,$message);
 					//error_reporting(0);
-					echo $ErrorCSS;
+					echo '<div class = "container">'.$ErrorCSS.'</div>';
 				}
 				for ($i=0; $i <$warningcount; $i++) {
 
@@ -63,7 +63,7 @@
 					$message = $data["cssvalidation"]["warnings"][$i]['message'];
 					$WarningCSS = New WarningCSS($line,$type,$message);
 				
-					echo $WarningCSS;
+					echo '<div class = "container">'.$WarningCSS.'</div>';
 				}
 				//-------------------------------------------------------------------------------------------------------HTML--------------------------------------------------------------------------------------------------
 			   	//Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net-
@@ -94,7 +94,7 @@
 
 						$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
 
-						echo $ErrorHTML;
+						echo '<div class = "container">'.$ErrorHTML.'</div>';
 
 					}
 			}
@@ -106,3 +106,4 @@
 
 
  ?>
+ 

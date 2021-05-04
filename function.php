@@ -55,22 +55,22 @@ function Nav(){
 	<html>
 	<head>
 	  <link rel="stylesheet" type="text/css" href="\style\style.css">
-	
 	</head>
 	<body>
+	<herder><header>
 	<h1>Validator</h1>
 
 	<ul>
-	  <li><a href="main.php">Accueil</a></li>
-	  <li><a href="#news">À propos</a></li>
+	  <li><a href="index.php">Accueil</a></li>
+	  <li><a href="#propos">À propos</a></li>
 	  <li><a href="#contact">Contact</a></li>
 	  <li style="float:right"><a href="connexion.php">Connexion</a></li>
 	  <li style="float:right"><a href="inscription.php">Inscription</a></li>
-	</ul>';
+	</ul><div id="bodyofbody">';
 	return $header;
 }
 function Footer(){
-	$footer='
+	$footer='</div>
 	<footer><p>© 2021 - WASEF Alexandra & BELHOCINE Thilleli</p></footer>
 	
 	</body>
@@ -90,5 +90,6 @@ function FormValidator(){
 
 	return $form;
 }
+
 
 ?>

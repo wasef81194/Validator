@@ -18,8 +18,8 @@ class TypeErreur{
 	}
 
 	public function __toString(){
-        $out  = "<------------------Erreur-----------------><br>";
-        $out .= "<p> Type : ". $this->type ."</p>";
+        $out  = "";
+        $out .= "<p> <b>Type : </b>". $this->type ."</p>";
         return $out;
     }
 

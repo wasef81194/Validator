@@ -60,27 +60,25 @@ class ErrorHTML extends TypeErreur{
 	}*/
 
 	public function __toString(){
-
-        $out = parent::__toString();
-        $out  .= "<br><------------------Dans le code HTML-----------------><br>";
+		$out = "<h3>Erreur dans le code HTML</h3>";
+        $out .= parent::__toString();
         //$out .= "<p>Type d'erreur : ". $this->type ."</p>";
-        $out .= "<p>Message : ". $this->message ."</p>";
+        $out .= "<p><b>Message : </b>". $this->message ."</p>";
         if (!empty($this->extract)) {
-        $out .= "<p>Extrait  : <xmp>".$this->extract. "</xmp></p>";
+        $out .= "<p><b>Extrait  : </b><xmp>".$this->extract. "</xmp></p>";
         }
       	if (!empty($this->lastLine)) {
-      		$out .= "<p>Dernière Ligne : ". $this->lastLine ."</p>" ;// a dernière ligne (incluse) sur laquelle tombe la plage source associée au message.
+      		$out .= "<p><b>Dernière Ligne :</b> ". $this->lastLine ."</p>" ;// a dernière ligne (incluse) sur laquelle tombe la plage source associée au message.
       	}
       	if (!empty($this->firstLine)) {
-      		$out .= "<p>Première Ligne : ".$this->firstLine."</p>";//indique la première ligne sur laquelle tombe la plage source associée au message
+      		$out .= "<p><b>Première Ligne :</b> ".$this->firstLine."</p>";//indique la première ligne sur laquelle tombe la plage source associée au message
       	}
       	if (!empty($this->lastColumn)) {
-      		$out .= "<p>Dernière Colonne : ".$this->lastColumn."</p>";// indique la dernière colonne (incluse) sur laquelle la plage source associée au message tombe sur la dernière ligne sur laquelle se trouve.
+      		$out .= "<p><b>Dernière Colonne :</b> ".$this->lastColumn."</p>";// indique la dernière colonne (incluse) sur laquelle la plage source associée au message tombe sur la dernière ligne sur laquelle se trouve.
       	}
       	if (!empty($this->firstColumn)) {
-      		$out .= "<p>Première Colonne : ".$this->firstColumn."</p>";// indique la première colonne sur laquelle tombe la plage source associée au message sur la première ligne sur laquelle tombe.*/
+      		$out .= "<p><b>Première Colonne :</b> ".$this->firstColumn."</p>";// indique la première colonne sur laquelle tombe la plage source associée au message sur la première ligne sur laquelle tombe.*/
       	}
-      	$out .= "</code>";
         return $out;
     }
 

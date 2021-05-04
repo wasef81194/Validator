@@ -30,10 +30,10 @@ class WarningCSS extends TypeErreur{
 	}
 	public function __toString(){
 
-        $out = parent::__toString();
-        $out  .= "<------------------Dans le code CSS-----------------><br>";
-        $out .= "<p>Line : ". $this->line ."</p>";
-        $out .= "<p>Message : ". $this->message ."</p>";
+        $out = "<h3> Erreur dans le code CSS</h3>";
+        $out  .= parent::__toString();
+        $out .= "<p><b>Line :</b> ". $this->line ."</p>";
+        $out .= "<p><b>Message :</b> ". $this->message ."</p>";
         
         return $out;
     }

@@ -36,7 +36,7 @@ class ErrorCSS extends WarningCSS{
 	public function __toString(){
 
         $out = parent::__toString();
-        $out .= "<p>Context : <code> ". $this->context ."</code></p>";
+        $out .= "<p><b>Context : </b> <code> ". $this->context ."</code></p>";
         
         return $out;
     }
