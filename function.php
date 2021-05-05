@@ -49,15 +49,32 @@ function CountTabUrl($url){
 	$count = count($taburl);
 	return $count;
 }
+function CheckValue($value){
+	if ($value == NULL) {
+		$value = 0;
+		return $value;
+	}
+	else{
+		return $value;
+	}
+}
+function NoError($error)
+{
+	if ($error == 0) {
+		$message = '<div class = "container"> PAS D\'ERREUR </div>';
+	}
+	return $message;
+}
+
 function Nav(){
 	$header='
 	<!DOCTYPE html>
-	<html>
+	<html lang="fr">
 	<head>
-	  <link rel="stylesheet" type="text/css" href="\style\style.css">
+	<title>Validator</title>
+	  <link rel="stylesheet" type="text/css" href="/style/style.css">
 	</head>
 	<body>
-	<herder><header>
 	<h1>Validator</h1>
 
 	<ul>

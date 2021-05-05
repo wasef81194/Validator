@@ -15,7 +15,7 @@ class ErrorHTML extends TypeErreur{
 	private $lastColumn;
 	private $firstColumn;
 
-	public function __construct(string $type, string $message,  $extract,  $lastLine,  $firstLine, $lastColumn,  $firstColumn){
+	public function __construct(string $type, string $message,  string $extract,  int $lastLine,  int $firstLine, int $lastColumn,  int $firstColumn){
 
         parent::__construct($type);
 		$this->message = $message;

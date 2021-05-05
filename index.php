@@ -46,24 +46,28 @@
 				$errorcount = $data["cssvalidation"]["result"]["errorcount"];
 				$warningcount = $data["cssvalidation"]["result"]["warningcount"];
 				//echo $errorcount;
-				for ($i=0; $i <$errorcount; $i++) {
-					$line = $data["cssvalidation"]["errors"][$i]['line'];
-					$context = $data["cssvalidation"]["errors"][$i]['context'];
-					$type = $data["cssvalidation"]["errors"][$i]['type'];
-					$message = $data["cssvalidation"]["errors"][$i]['message'];
+				if ($errorcount == 0 && $warningcount==0) {
+						echo '<div class = "containergreen"><p> Pas d\'erreur dans le code CSS <p></div>';
+					}
+				else{
+					for ($i=0; $i <$errorcount; $i++) {
+						$line = CheckValue($data["cssvalidation"]["errors"][$i]['line']);
+						$context = $data["cssvalidation"]["errors"][$i]['context'];
+						$type = $data["cssvalidation"]["errors"][$i]['type'];
+						$message = $data["cssvalidation"]["errors"][$i]['message'];
+						$ErrorCSS = New ErrorCSS($line,$context,$type,$message);
+						//error_reporting(0);
+						echo '  <div class = "container"> <h3> Erreur dans le code CSS</h3>'.$ErrorCSS.'</div>';
+					}
+					for ($i=0; $i <$warningcount; $i++) {
 
-					$ErrorCSS = New ErrorCSS($line,$context,$type,$message);
-					//error_reporting(0);
-					echo '<div class = "container">'.$ErrorCSS.'</div>';
-				}
-				for ($i=0; $i <$warningcount; $i++) {
-
-					$line = $data["cssvalidation"]["warnings"][$i]['line'];
-					$type = $data["cssvalidation"]["warnings"][$i]['type'];
-					$message = $data["cssvalidation"]["warnings"][$i]['message'];
-					$WarningCSS = New WarningCSS($line,$type,$message);
-				
-					echo '<div class = "container">'.$WarningCSS.'</div>';
+						$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
+						$type = $data["cssvalidation"]["warnings"][$i]['type'];
+						$message = $data["cssvalidation"]["warnings"][$i]['message'];
+						$WarningCSS = New WarningCSS($line,$type,$message);
+					
+						echo '  <div class = "containerorange"> <h3> Avertissement dans le code CSS</h3>'.$WarningCSS.'</div>';
+					}
 				}
 				//-------------------------------------------------------------------------------------------------------HTML--------------------------------------------------------------------------------------------------
 			   	//Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net-
@@ -82,20 +86,25 @@
 					$recup_data = file_get_contents($APIHTML, false, $context);
 					$data = json_decode($recup_data ,true);// Récupre les donnnées json en php
 					$number = count($data["messages"]);
+					//echo $number;
+					if ($number == 0) {
+						echo '<div class = "containergreen"><p> Pas d\'erreur dans le code HTML <p></div>';
+					}
+					else{
 					// Affiche les erreur html de la page  http://yourgame.alwaysdata.net
-					for ($f=0; $f <$number ; $f++) {
-						$type = $data["messages"][$f]['type'];
-						$message = $data["messages"][$f]['message'];
-						$extract = $data["messages"][$f]['extract'];
-						$lastLine = $data["messages"][$f]['lastLine'];
-						$firstLine = $data["messages"][$f]['firstLine'];
-						$lastColumn =  $data["messages"][$f]['lastColumn'];
-						$firstColumn = $data["messages"][$f]['firstColumn'];
+						for ($f=0; $f <$number ; $f++) {
+							$type = $data["messages"][$f]['type'];
+							$message = $data["messages"][$f]['message'];
+							$extract = $data["messages"][$f]['extract'];
+							$lastLine = CheckValue($data["messages"][$f]['lastLine']);
+							$firstLine = CheckValue($data["messages"][$f]['firstLine']);
+							$lastColumn =  CheckValue($data["messages"][$f]['lastColumn']);
+							$firstColumn = CheckValue($data["messages"][$f]['firstColumn']);
 
-						$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
-
-						echo '<div class = "container">'.$ErrorHTML.'</div>';
-
+							$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
+							
+							echo '<div class = "container">'.$ErrorHTML.'</div>';
+						}
 					}
 			}
 

@@ -30,7 +30,19 @@ class URLS{
 	public function ValideURL(){//verifie que le lien n'est pas une image
 		$url = $this->url;
 		if (!preg_match('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)([^\s]+(\.(?i)(jpg|png|gif|bmp|ico|html#v14))$)@',$url)) {
-			return True;
+			if (!preg_match("/#/", $url)) {
+				if (!preg_match("/@/", $url))
+					{
+						return True;
+					}
+				else{
+						return False;
+					}
+			}
+			else
+			{
+				return False;
+			}
 		}
 		else{
 			return False;
