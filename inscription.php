@@ -2,16 +2,33 @@
 
 include_once 'function.php';
 include_once './class/bdd/connexionbdd.php';
+include_once './class/inscription/forminscription.php';
 
 //----------------------------------------------------------------------------------------------
-echo Nav();
+echo Nav('Inscription');
 $ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');// Appel de la class
 
-//echo $ConnexionBDD;
-/*$conn = $ConnexionBDD->OpenCon();
-$request = "INSERT INTO `user`(id_user,nom_user,prenom_user,mail_user,login_user,mdp_user)
-              VALUES (NULL,'Wasef', 'Alexandra', 'alex.wasef@gmail.com' ,'wasef','wasef01*')";
-$ConnexionBDD->getResults($conn,$request);*/
+
+echo FormInscription();
+if ($_POST["formtype"] == "inscription") {
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$email = $_POST['email'];
+	$tel =  $_POST['tel'];
+	$login =  $_POST['login'];
+	$password = $_POST['password'];
+	$Inscription = new FormInscription($nom,$prenom,$email, $tel,$login, $password);
+	$ChekForm = $Inscription->CehckForm();
+	//echo $Inscription;
+	//echo $ChekForm;
+	if ($ChekForm == 1) {
+		echo 'OKKKKKKKKKKKKKK';
+	}
+	else{
+		echo $ChekForm;
+	}
+}
 echo Footer();
+
 
 ?>

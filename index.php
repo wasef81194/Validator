@@ -9,7 +9,7 @@
 	include_once './class/validator/formvalidator.php';
 
  //----------------------------------------------------------------------------------------------
-	echo Nav(); //Menu de navigation
+	echo Nav('Validator'); //Menu de navigation
 	echo FormValidator();// Formulaire de validiation de site
 	if ($_POST["formtype"] == "validator") {
 	$FormValidator = New FormValidator($_POST["formtype"],$_POST["url"]);// Appel de la class
@@ -35,38 +35,38 @@
 		//---------------------------------------------------------------------------------------------------CSS--------------------------------------------------------------------------------------------
 			$UrlValid = $URLS->ValideURL();
 			if ($UrlValid) {
-
 				echo "<h2><b>La page à corriger : </b>". $URLS->GetURL()."</h2>";
+				if ($x == 0) {//CSS Verfier seulement sur la premier page pour plus de performance
+					//echo "<h3>Dans le code CSS :</h3>";
+					$APICSS = $URLS->GetURLValidatorCSS();
+					$recup_data = file_get_contents($APICSS);
+					$data = json_decode($recup_data,TRUE);
+					//var_dump($data);
+					$errorcount = $data["cssvalidation"]["result"]["errorcount"];
+					$warningcount = $data["cssvalidation"]["result"]["warningcount"];
+					//echo $errorcount;
+					if ($errorcount == 0 && $warningcount==0) {
+							echo '<div class = "containergreen"><p> Pas d\'erreur dans le code CSS <p></div>';
+						}
+					else{
+						for ($i=0; $i <$errorcount; $i++) {
+							$line = CheckValue($data["cssvalidation"]["errors"][$i]['line']);
+							$context = $data["cssvalidation"]["errors"][$i]['context'];
+							$type = $data["cssvalidation"]["errors"][$i]['type'];
+							$message = $data["cssvalidation"]["errors"][$i]['message'];
+							$ErrorCSS = New ErrorCSS($line,$context,$type,$message);
+							//error_reporting(0);
+							echo '  <div class = "containerred"> <h3> Erreur dans le code CSS</h3>'.$ErrorCSS.'</div>';
+						}
+						for ($i=0; $i <$warningcount; $i++) {
 
-				//echo "<h3>Dans le code CSS :</h3>";
-				$APICSS = $URLS->GetURLValidatorCSS();
-				$recup_data = file_get_contents($APICSS);
-				$data = json_decode($recup_data,TRUE);
-				//var_dump($data);
-				$errorcount = $data["cssvalidation"]["result"]["errorcount"];
-				$warningcount = $data["cssvalidation"]["result"]["warningcount"];
-				//echo $errorcount;
-				if ($errorcount == 0 && $warningcount==0) {
-						echo '<div class = "containergreen"><p> Pas d\'erreur dans le code CSS <p></div>';
-					}
-				else{
-					for ($i=0; $i <$errorcount; $i++) {
-						$line = CheckValue($data["cssvalidation"]["errors"][$i]['line']);
-						$context = $data["cssvalidation"]["errors"][$i]['context'];
-						$type = $data["cssvalidation"]["errors"][$i]['type'];
-						$message = $data["cssvalidation"]["errors"][$i]['message'];
-						$ErrorCSS = New ErrorCSS($line,$context,$type,$message);
-						//error_reporting(0);
-						echo '  <div class = "container"> <h3> Erreur dans le code CSS</h3>'.$ErrorCSS.'</div>';
-					}
-					for ($i=0; $i <$warningcount; $i++) {
-
-						$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
-						$type = $data["cssvalidation"]["warnings"][$i]['type'];
-						$message = $data["cssvalidation"]["warnings"][$i]['message'];
-						$WarningCSS = New WarningCSS($line,$type,$message);
-					
-						echo '  <div class = "containerorange"> <h3> Avertissement dans le code CSS</h3>'.$WarningCSS.'</div>';
+							$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
+							$type = $data["cssvalidation"]["warnings"][$i]['type'];
+							$message = $data["cssvalidation"]["warnings"][$i]['message'];
+							$WarningCSS = New WarningCSS($line,$type,$message);
+						
+							echo '  <div class = "containerorange"> <h3> Avertissement dans le code CSS</h3>'.$WarningCSS.'</div>';
+						}
 					}
 				}
 				//-------------------------------------------------------------------------------------------------------HTML--------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@
 
 							$ErrorHTML = New ErrorHTML($type,$message,$extract,$lastLine,$firstLine,$lastColumn,$firstColumn);
 							
-							echo '<div class = "container">'.$ErrorHTML.'</div>';
+							echo '<div class = "containerred">'.$ErrorHTML.'</div>';
 						}
 					}
 			}

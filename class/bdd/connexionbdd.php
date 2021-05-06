@@ -59,8 +59,9 @@ class ConnexionBDD{
 
 	     $result = mysqli_query($conn,$request);
 	     //fermeture de la connexion
-	     $conn -> close();
+	     
 	     return $result;
+	     $conn -> close();
 	 }
 
 	public function __toString(){

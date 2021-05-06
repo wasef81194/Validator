@@ -1,8 +1,8 @@
 #bodyofbody{
-	margin-left: 70px;
+	margin-left: 95px;
 	margin-right: 70px;
 }
-.container {
+.containerred {
 
 	background-color: #FACACE;
 	padding:  2px 16px;
@@ -16,36 +16,40 @@
 	margin-left: 20px;  
 	
 }
-.container:hover {
+.containerred:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-.container p,.container xmp{
+.containerred p,.containerred xmp{
 	padding-left: 60px;
 }
-.container xmp{
+.containerred xmp{
 	font-weight: bold;
+	color: #C72B36;
 }
-.container h3{
+.containerred h3{
 	padding-left: 20px;
 	padding-bottom: 10px;
 }
 .containergreen {
 
 	background-color: #98faa4;
-	padding:  2px 16px;
+	padding:  10px 16px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	transition: 0.3s;
 	width: 95%;
 	display: inline-block;
 	margin-right: 10px;
 	border-radius: 5px;
-	margin-bottom: 50px;
+	margin-bottom: 40px;
 	margin-left: 20px; 
-	text-align: center; 
+	text-align: center;
 	
 }
 .containergreen p{
 	font-weight: bold;
+
+	margin-top: 10px !important;
+	font-size: 18px !important;
 }
 .containergreen:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -103,6 +107,17 @@ ul {
 	.active {
 	  background-color: #4CAF50;
 	}
+ li a , li a:active
+    	{
+   		 	 
+	  		text-decoration: none !important;
+	  		color: white!important;
+		}
+li a:focus, li a:hover
+	{
+  			text-decoration: none !important;
+	  		color: white!important;
+	}
 
 h1{
 	text-align: center;
@@ -115,7 +130,7 @@ font-weight: bold;
 
 }
 #url{
-  width: 65%;
+  width: 70%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -144,12 +159,19 @@ form label {
 	display: inline-block;
 }
 h2, h1{
-	color: #C72B36;
+	color: #C72B36 !important;
+
+	
+
+}
+h2{
+	font-size: 26px !important;
 }
 form h2{
+	font-size: 26px !important;
 	color: black;
 }
-b{
+b{	
 	color: black;
 }
 footer{
@@ -161,3 +183,23 @@ height:50px;
 text-align: center;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
+{
+	margin-top: 20px !important;
+   	background-color: #F66D6F !important;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
+{
+   	border-color: #8c1111 !important;
+}
+
+.btn-primary:active 
+ {
+   	background-color: #C32224 !important;
+}
+.container{
+	margin-top: 100px;
+}
+.container h2{
+	color: black !important;
+}

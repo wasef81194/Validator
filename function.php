@@ -66,13 +66,17 @@ function NoError($error)
 	return $message;
 }
 
-function Nav(){
+function Nav($title){
 	$header='
 	<!DOCTYPE html>
 	<html lang="fr">
 	<head>
-	<title>Validator</title>
+		<title>'.$title.'</title>
+		<meta charset="utf-8">
 	  <link rel="stylesheet" type="text/css" href="/style/style.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 	<h1>Validator</h1>
@@ -106,6 +110,130 @@ function FormValidator(){
 	</form>';
 
 	return $form;
+}
+/*function NavBootstrap($title){
+	$header='
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<title>'.$title.'</title>
+		<meta charset="utf-8">
+	  <link rel="stylesheet" type="text/css" href="/style/style.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<style>
+  		.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
+  		{
+   			 background-color: #8064A2 !important;
+   		}
+   		.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
+  		{
+   			 border-color: green !important;
+   		}
+
+    	 .btn-primary:active 
+    	{
+   		 	 background-color: yellow !important;
+		}
+		ul, li, a {
+			list-style: none;
+		}
+	</style>
+	</head>
+	<body>
+	<h1>Validator</h1>
+
+	<ul>
+	  <li><a href="index.php">Accueil</a></li>
+	  <li><a href="#propos">À propos</a></li>
+	  <li><a href="#contact">Contact</a></li>
+	  <li style="float:right"><a href="connexion.php">Connexion</a></li>
+	  <li style="float:right"><a href="inscription.php">Inscription</a></li>
+	</ul><div id="bodyofbody">';
+	return $header;
+}*/
+function FormInscription(){
+	$form = '<form action="inscription.php" method="post" >
+		<div class="container ">
+
+			<h2> Inscription <h2>
+			<div class="form-row">
+				<div class="col-md-6">
+					<label for="nom"> Nom : </label>
+					<input type="nom" name="nom" id="nom" class="form-control" placeholder="Smith" required>
+				</div>
+			
+				<div class="col-md-6">
+					<label for="prenom"> Prenom : </label>
+					<input type="prenom" name="prenom" id="prenom" class="form-control" placeholder="Jean" required >
+				</div>
+			</div>
+
+
+			<div class="form-row">
+				<div class="col-md-6">
+					<label for="email"> E-mail : </label>
+					<input type="email" name="email" id="email" class="form-control" placeholder="nom@exemple.com" required> 
+				</div>
+			
+				<div class="col-md-6">
+					<label for="tel"> Télephone : </label>
+					<input type="tel" name="tel" id="tel" class="form-control" placeholder="06 23 56 84 12 (optionel)" >
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="col-md-6">
+					<label for="login"> Login : </label>
+					<input type="login" name="login" id="login" class="form-control" placeholder="NomPrenom75" required> 
+				</div>
+			
+				<div class="col-md-6">
+					<label for="password"> Mot de passe : </label>
+					<input type="password" name="password" id="password" class="form-control" placeholder="6 caratère minimum" required>
+				</div>
+			</div>
+
+			<input type="hidden" name="formtype" value="inscription" /> 
+			<div class="col text-center">
+				<button type="submit" class="btn btn-primary color-99CC5B">Envoyer</button>
+			</div>
+		</div>
+	</form>';
+
+	return $form;
+}
+function MailExist($mail){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le mail entre n'existe pas dans la base de données 
+	$request_mail =  ("SELECT mail_user FROM user ");
+	$verification_mail = $ConnexionBDD->getResults($conn,$request_mail);
+	 while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
+		 for ($i=0; $i <sizeof($row) ; $i++) { 
+			if ($row[$i]==$mail) {
+				$MailExist = 'Exist';
+				return $MailExist;
+			}
+		}
+	}
+}
+function LoginExist($login){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le login n'existe pas 
+	$request_login =  ("SELECT login_user FROM user ");
+	$verification_login = $ConnexionBDD->getResults($conn,$request_login);
+	 while ($row = $verification_login -> fetch_array(MYSQLI_NUM)) {
+		 for ($i=0; $i <sizeof($row) ; $i++) { 
+			if ($row[$i]==$login) {
+				$LoginExist = 'Exist';
+				return $LoginExist;
+			}
+		}
+	}
 }
 
 
