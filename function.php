@@ -205,34 +205,57 @@ function FormInscription(){
 
 	return $form;
 }
+
+
+
 function MailExist($mail){
 	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
 	$conn = $ConnexionBDD->OpenCon();
 	// Verifie que le mail entre n'existe pas dans la base de données 
-	$request_mail =  ("SELECT mail_user FROM user ");
+	$request_mail = ("SELECT COUNT(*) mail_user FROM user WHERE mail_user='$mail'");
 	$verification_mail = $ConnexionBDD->getResults($conn,$request_mail);
-	 while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
+	while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
 		 for ($i=0; $i <sizeof($row) ; $i++) { 
-			if ($row[$i]==$mail) {
-				$MailExist = 'Exist';
-				return $MailExist;
+			if ($row[0]==1) {
+				return $MailExist= True;
 			}
+			else{
+				return False;
+			}
+			
 		}
 	}
 }
+// Verifier si le login n'existe pas dans la bdd 
 function LoginExist($login){
 	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
 	$conn = $ConnexionBDD->OpenCon();
 	// Verifie que le login n'existe pas 
-	$request_login =  ("SELECT login_user FROM user ");
+	$request_login =  ("SELECT COUNT(*) login_user FROM user WHERE login_user='$login'");
 	$verification_login = $ConnexionBDD->getResults($conn,$request_login);
 	 while ($row = $verification_login -> fetch_array(MYSQLI_NUM)) {
 		 for ($i=0; $i <sizeof($row) ; $i++) { 
-			if ($row[$i]==$login) {
-				$LoginExist = 'Exist';
-				return $LoginExist;
+			if ($row[0]==1) {
+				return $LoginExist = True;
+			}
+			else{
+				return False;
 			}
 		}
+	}
+}
+
+
+// function qui insère les données du user dans la bdd
+function InsertUser($nom,$prenom,$email,$tel,$login,$password){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le login n'existe pas 
+	$request =  ("INSERT INTO `user`(id_user,nom_user,prenom_user,mail_user,tel_user,login_user,mdp_user)
+              VALUES (NULL,'$nom', '$prenom','$email' ,'$tel','$login','$password')");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	if($verification){
+		return True;
 	}
 }
 

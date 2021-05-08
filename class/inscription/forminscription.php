@@ -1,5 +1,7 @@
 <?php
-include_once '././function.php';
+//include_once ('../function.php');
+include_once $_SERVER['DOCUMENT_ROOT']. 'function.php';
+/**
 /**
  * Check du formulaire d'inscription
  * @param : nom, prenom, email, telephon, login, mot de passe
@@ -13,6 +15,8 @@ class FormInscription{
 	private $tel;
 	private $login;
 	private $password;
+
+
 
 	public function __construct(string $nom, string $prenom, string $mail, int $tel,  string $login, string $password){	
 
@@ -44,27 +48,34 @@ class FormInscription{
 	}
 
  	public function CehckForm(){
-			if (!empty($this->nom) AND !empty($this->prenom) AND !empty($this->mail) AND !empty($this->login) AND !empty($this->password) ) {
+ 			
 
+			if (!empty($this->nom) AND !empty($this->prenom) AND !empty($this->mail) AND !empty($this->tel) AND !empty($this->login) AND !empty($this->password) ) {
+				$inscriptionOk=False;
+ 				$LoginExist = LoginExist($this->login);
+      			$MailExist = MailExist($this->mail);
 				 //-----------------------------------------------------------
-				if (LoginExist($this->login) == 'Exist') {
-					$message = "Ce login est déjà pris";
-					return $message;
+				if ((!$MailExist AND !$sirenExist)) {
+					InsertUser($this->nom,$this->prenom,$this->mail,$this->tel,$this->login,$this->password);
+					$inscriptionOk=True;
+
 				}
-				elseif (MailExist($this->mail) == 'Exist') {
-					$message = "Ce mail est déjà pris";
-					return $message;
-					
-				}
-				else{
-					return True;
-				}
+				//afficher les resultat en json
+			      $tab["inscriptionOk"]=$inscriptionOk;
+			      $tab["mailExist"] = $MailExist;
+			      $tab["loginExist"] = $LoginExist;	
+				
 			}
+			
+
 			else{
 				$message = "Veuillez remplir les champs obligatoire";
-				return $message;
+
+				$tab["errorMessage"] = $message;
 			}
-		}
+		
+		print_r(json_encode($tab));
+	}
 	public function __toString(){
 
         $out  = "<------------------Info User-----------------><br>";
@@ -80,5 +91,7 @@ class FormInscription{
     }
 
 }
+
+
 
 ?>
