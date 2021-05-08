@@ -105,8 +105,13 @@ function FormValidator(){
 	<h2>Valide ton site</h2>
 	<label>Entrez l\'url de votre site :</label>
     <input type="text" placeholder="https://example.com" name="url" id="url" required/> 
+	<br>
+	<div style="text-align : center;">
+    <input  type="checkbox" id="warning" name="warning">   <label for="warning" style="font-size : 12px;">  Afficher les avertissements du code CSS</label>
+    <br>
      <input type="hidden" name="formtype" value="validator" /> 
-     <input type="submit" value="Valider" id="ButtonValid"/>
+     <input  type="submit" value="Valider" id="ButtonValid"/>
+     </div>
 	</form>';
 
 	return $form;

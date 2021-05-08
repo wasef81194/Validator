@@ -12,7 +12,7 @@
 	echo Nav('Validator'); //Menu de navigation
 	echo FormValidator();// Formulaire de validiation de site
 	if ($_POST["formtype"] == "validator") {
-	$FormValidator = New FormValidator($_POST["formtype"],$_POST["url"]);// Appel de la class
+	$FormValidator = New FormValidator($_POST["formtype"],$_POST["url"],$_POST["warning"]);// Appel de la class
 	$url = $FormValidator->GetUrl();//utilisation de ces fonctions
 	$FormCheck = $FormValidator->CehckForm();//utilisation de ces fonctions
 	}
@@ -58,14 +58,16 @@
 							//error_reporting(0);
 							echo '  <div class = "containerred"> <h3> Erreur dans le code CSS</h3>'.$ErrorCSS.'</div>';
 						}
-						for ($i=0; $i <$warningcount; $i++) {
+						if ($FormValidator->CheckWarningCSS()) {
+							for ($i=0; $i <$warningcount; $i++) {
 
-							$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
-							$type = $data["cssvalidation"]["warnings"][$i]['type'];
-							$message = $data["cssvalidation"]["warnings"][$i]['message'];
-							$WarningCSS = New WarningCSS($line,$type,$message);
-						
-							echo '  <div class = "containerorange"> <h3> Avertissement dans le code CSS</h3>'.$WarningCSS.'</div>';
+								$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
+								$type = $data["cssvalidation"]["warnings"][$i]['type'];
+								$message = $data["cssvalidation"]["warnings"][$i]['message'];
+								$WarningCSS = New WarningCSS($line,$type,$message);
+							
+								echo '  <div class = "containerorange"> <h3> Avertissement dans le code CSS</h3>'.$WarningCSS.'</div>';
+							}
 						}
 					}
 				}
