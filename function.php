@@ -222,10 +222,10 @@ function MailExist($mail){
 	while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
 		 for ($i=0; $i <sizeof($row) ; $i++) { 
 			if ($row[0]==1) {
-				return $MailExist= True;
+				return $MailExist= TRUE;
 			}
 			else{
-				return False;
+				return false;
 			}
 			
 		}
@@ -241,10 +241,10 @@ function LoginExist($login){
 	 while ($row = $verification_login -> fetch_array(MYSQLI_NUM)) {
 		 for ($i=0; $i <sizeof($row) ; $i++) { 
 			if ($row[0]==1) {
-				return $LoginExist = True;
+				return $LoginExist = TRUE;
 			}
 			else{
-				return False;
+				return false;
 			}
 		}
 	}
@@ -260,8 +260,23 @@ function InsertUser($nom,$prenom,$email,$tel,$login,$password){
               VALUES (NULL,'$nom', '$prenom','$email' ,'$tel','$login','$password')");
 	$verification = $ConnexionBDD->getResults($conn,$request);
 	if($verification){
-		return True;
+		return TRUE;
 	}
+}
+
+// function qui vérifie si l'utilisateur est bien inscris
+function verifUser($login,$password){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request =  ("SELECT count(*) FROM user WHERE login_user='$login' AND mdp_user='$password'");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	while ($row = $verification -> fetch_array(MYSQLI_NUM)) {
+		if($row[0] == 1){
+			return TRUE;
+		}
+	}
+
 }
 
 

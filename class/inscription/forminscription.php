@@ -47,34 +47,32 @@ class FormInscription{
 		return $this->password;
 	}
 
- 	public function CehckForm(){
+ 	public function CheckForm(){
  			
-
+ 			$message=false;
 			if (!empty($this->nom) AND !empty($this->prenom) AND !empty($this->mail) AND !empty($this->tel) AND !empty($this->login) AND !empty($this->password) ) {
-				$inscriptionOk=False;
- 				$LoginExist = LoginExist($this->login);
-      			$MailExist = MailExist($this->mail);
+				$inscriptionOk=false;
+ 				$LoginExist=LoginExist($this->login);
+      			$MailExist=MailExist($this->mail);
 				 //-----------------------------------------------------------
-				if ((!$MailExist AND !$sirenExist)) {
+				if ((!$MailExist AND !$LoginExist)) {
 					InsertUser($this->nom,$this->prenom,$this->mail,$this->tel,$this->login,$this->password);
-					$inscriptionOk=True;
+					$inscriptionOk=TRUE;
 
 				}
 				//afficher les resultat en json
 			      $tab["inscriptionOk"]=$inscriptionOk;
-			      $tab["mailExist"] = $MailExist;
-			      $tab["loginExist"] = $LoginExist;	
+			      $tab["mailExist"]=$MailExist;
+			      $tab["loginExist"]=$LoginExist;	
+				
+			}
+			else{
+				$message=TRUE;
+				$tab["errorMessage"]=$message;
 				
 			}
 			
-
-			else{
-				$message = "Veuillez remplir les champs obligatoire";
-
-				$tab["errorMessage"] = $message;
-			}
-		
-		print_r(json_encode($tab));
+			return (json_encode($tab));
 	}
 	public function __toString(){
 
