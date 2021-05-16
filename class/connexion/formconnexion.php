@@ -3,9 +3,9 @@
 include_once $_SERVER['DOCUMENT_ROOT']. 'function.php';
 /**
 /**
- * Check du formulaire d'inscription
- * @param : nom, prenom, email, telephon, login, mot de passe
- * @return : Message d'erreur si l'url n'est pas saisie correctement
+ * Check du formulaire de connexion
+ * @param : login mdp
+ * @return : connexion ou non 
  */
 class FormConnexion{
 

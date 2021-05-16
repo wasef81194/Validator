@@ -7,6 +7,7 @@
 	include_once './class/validator/warningcss.php';
 	include_once 'function.php';
 	include_once './class/validator/formvalidator.php';
+	include_once './class/logs/logs.php';
 
  //----------------------------------------------------------------------------------------------
 	echo Nav('Validator'); //Menu de navigation
@@ -17,7 +18,9 @@
 	$FormCheck = $FormValidator->CehckForm();//utilisation de ces fonctions
 	}
 	if($FormCheck != 'TRUE'){
-		echo $FormCheck;// si l'url n'est pas valide cela affiche un message d'erreur 
+		echo '<div class="alert alert-danger text-center mt-4" role="alert">URL non valide </div>';// si l'url n'est pas valide cela affiche un message d'erreur 
+		$Logs = New Logs('à entrer une URL incorrect ');
+		$Logs->SaveLogs();
 	}
 	else{//si non l'API corrige les pages
 		//$url = 'http://mygame.alwaysdata.net/';
@@ -35,6 +38,8 @@
 		//---------------------------------------------------------------------------------------------------CSS--------------------------------------------------------------------------------------------
 			$UrlValid = $URLS->ValideURL();
 			if ($UrlValid) {
+				$Logs = New Logs('à fait vérifier les erreurs CSS de la page '.$URLS->GetURL() );
+				$Logs->SaveLogs();
 				echo "<h2><b>La page à corriger : </b>". $URLS->GetURL()."</h2>";
 				if ($x == 0) {//CSS Verfier seulement sur la premier page pour plus de performance
 					//echo "<h3>Dans le code CSS :</h3>";
@@ -45,6 +50,7 @@
 					$errorcount = $data["cssvalidation"]["result"]["errorcount"];
 					$warningcount = $data["cssvalidation"]["result"]["warningcount"];
 					//echo $errorcount;
+					
 					if ($errorcount == 0 && $warningcount==0) {
 							echo '<div class = "containergreen"><p> Pas d\'erreur dans le code CSS <p></div>';
 						}
@@ -60,6 +66,8 @@
 						}
 						if ($FormValidator->CheckWarningCSS()) {
 							for ($i=0; $i <$warningcount; $i++) {
+								$Logs = New Logs('à fait vérifier les avertissement CSS de la page '.$URLS->GetURL() );
+								$Logs->SaveLogs();
 
 								$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
 								$type = $data["cssvalidation"]["warnings"][$i]['type'];
@@ -75,6 +83,8 @@
 			   	//Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net-
 					//echo "<h3>Dans le code HTML :</h3>";
 					$APIHTML = $URLS->GetURLValidatorHTML();
+					$Logs = New Logs('à fait vérifier les erreurs HTML de la page '.$URLS->GetURL() );
+					$Logs->SaveLogs();
 					$options = array(
 					  'http'=>array(
 					    'method'=>"GET",
