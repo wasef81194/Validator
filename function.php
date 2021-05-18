@@ -5,6 +5,56 @@
   $parse = parse_url($url);
   echo $parse['host']; 
 */
+  //Inclure la classe PHPMailer
+// On va chercher la classe PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+function smtpmailer($to, $nom, $prenom)
+{
+	$mail = new PHPMailer;
+	$mail->CharSet = 'UTF-8';
+
+	$mail->isSMTP();					// Active l'envoi via SMTP
+	$mail->Host = 'smtp.gmail.com';			// Nom du serveur sur lequel vos emails sont hébergés
+	$mail->SMTPAuth = true;					// Active l'authentification par SMTP
+	$mail->Username = 'noreplysvalidator@gmail.com';			// Nom d'utilisateur SMTP (votre adresse email complète)
+	$mail->Password = 'Wasef01*';			// Mot de passe de l'adresse email indiquée précédemment
+	$mail->Port = 465;					// Port SMTP
+	$mail->SMTPSecure = "ssl";				// Utiliser SSL
+	$mail->isHTML(true);					// Format de l'email en HTML
+
+	//Voici ensuite les paramètres liés au mail :
+
+	$mail->From = 'noreplysvalidator@gmail.com';			// L'adresse mail de l'emetteur du mail (en général identique à l'adresse utilisée pour l'authentification SMTP)
+	$mail->FromName = 'Validator';				// Le nom de l'emetteur qui s'affichera dans le mail
+	$mail->addAddress($to);			// Un premier destinataire
+	//$mail->addAddress('ellen@example.com');			// Un second destifataire (facultatif)
+								// Possibilité de répliquer la ligne pour plus de destinataires
+	//$mail->addReplyTo('contact@azertyfrance.fr');			// Pour ajouter l'adresse à laquelle répondre (en général celle de la personne ayant rempli le formulaire)
+	//$mail->addCC('cc@example.com');				// Pour ajouter un champ Cc
+	//$mail->addBCC('bcc@example.com');			// Pour ajouter un champ Cci
+
+
+	$sujet = 'Bienvenue sur Validator';
+	$body = 'Bonjour '.$nom.' '.$prenom.', <br> tu peut maintenant te connecter avec les idntifians que vous avez saisie lors de votre inscription';
+	$mail->Subject = $sujet;			// Le sujet de l'email
+	$mail->Body    = $body;		// Le contenu du mail en HTML
+	$mail->AltBody = $body;	// Le contenu du mail au format texte
+	if(!$mail->Send())
+	{
+		$error ="Erreur...";
+		return $error;
+	}
+	else
+	{
+		$error = "Merci. Votre message a été bien envoyé.";
+		return $error;
+	}
+}
 function getTabUrl($url){
   $parse = parse_url($url); 
 	$taburl = [];
@@ -82,12 +132,22 @@ function Nav($title){
 	<h1>Validator</h1>
 
 	<ul>
-	  <li><a href="index.php">Accueil</a></li>
-	  <li><a href="#propos">À propos</a></li>
-	  <li><a href="#contact">Contact</a></li>
-	  <li style="float:right"><a href="connexion.php">Connexion</a></li>
-	  <li style="float:right"><a href="inscription.php">Inscription</a></li>
-	</ul><div id="bodyofbody">';
+	<li><a href="index.php">Accueil</a></li>
+	';
+	if (!empty($_SESSION['id_user'])) {
+		$header.= '<li><a href="PageProfile.php">Profil</a></li>
+		<li style="float:right"><a href="deconnexion.php">Déconnexion</a></li>
+		';
+	}
+	else{
+		$header.=  '
+		 <li><a href="#propos">À propos</a></li>
+		 <li><a href="#contact">Contact</a></li>
+		 <li style="float:right"><a href="connexion.php">Connexion</a></li>
+		 <li style="float:right"><a href="inscription.php">Inscription</a></li>
+		</ul><div id="bodyofbody">';
+	}
+	
 	return $header;
 }
 function Footer(){
