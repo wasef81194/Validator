@@ -8,6 +8,7 @@
 	include_once 'function.php';
 	include_once './class/validator/formvalidator.php';
 	include_once './class/logs/logs.php';
+	include_once './class/bdd/connexionbdd.php';
 
  //----------------------------------------------------------------------------------------------
 	echo Nav('Validator'); //Menu de navigation

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //$configs = include('login_bdd.php');
 //$config = include('login_bdd_cinemaneverland_bdd.php');
 //----------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-function smtpmailer($to, $nom, $prenom)
+function smtpmailer($to, $nom, $prenom, $key)
 {
 	$mail = new PHPMailer;
 	$mail->CharSet = 'UTF-8';
@@ -37,10 +37,11 @@ function smtpmailer($to, $nom, $prenom)
 	//$mail->addReplyTo('contact@azertyfrance.fr');			// Pour ajouter l'adresse à laquelle répondre (en général celle de la personne ayant rempli le formulaire)
 	//$mail->addCC('cc@example.com');				// Pour ajouter un champ Cc
 	//$mail->addBCC('bcc@example.com');			// Pour ajouter un champ Cci
-
-
+	$heure = date('H')+1;
+	$date = date('Y-m-d|'.$heure.':i:s');
 	$sujet = 'Bienvenue sur Validator';
-	$body = 'Bonjour '.$nom.' '.$prenom.', <br> tu peut maintenant te connecter avec les idntifians que vous avez saisie lors de votre inscription';
+	$body = 'Bonjour '.$nom.' '.$prenom.', <br> Bienvenu sur Validator ! il te manque plus qu\'une étape avant de pouvoir te connecter. Click sur le lien ci dessous et tu pourra envin avoir accées à ton esapce membre. Attention ! ce lien expire à '.$date.'<br>
+	Lien : https://validator.alwaysdata.net/validecompte.php?key='.$key.'&date='.$date;
 	$mail->Subject = $sujet;			// Le sujet de l'email
 	$mail->Body    = $body;		// Le contenu du mail en HTML
 	$mail->AltBody = $body;	// Le contenu du mail au format texte
@@ -119,32 +120,39 @@ function NoError($error)
 function Nav($title){
 	$header='
 	<!DOCTYPE html>
+	
 	<html lang="fr">
 	<head>
 		<title>'.$title.'</title>
 		<meta charset="utf-8">
-	  <link rel="stylesheet" type="text/css" href="/style/style.css">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  	<link rel="stylesheet" type="text/css" href="style/style.css">
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 	</head>
 	<body>
 	<h1>Validator</h1>
 
-	<ul>
-	<li><a href="index.php">Accueil</a></li>
+	
 	';
 	if (!empty($_SESSION['id_user'])) {
-		$header.= '<li><a href="PageProfile.php">Profil</a></li>
+		$header.= '<ul>
+		<li><a href="index.php">Accueil</a></li>
+		<li><a href="#propos">À propos</a></li>
+		<li><a href="#contact">Contact</a></li>
+		<li><a href="pageProfile.php">Profil</a></li>
 		<li style="float:right"><a href="deconnexion.php">Déconnexion</a></li>
-		';
+		<li style="float:right"><a href="delet_user.php">Me désinscrire</a></li>
+		</ul><div id="bodyofbody">';
 	}
 	else{
-		$header.=  '
-		 <li><a href="#propos">À propos</a></li>
-		 <li><a href="#contact">Contact</a></li>
-		 <li style="float:right"><a href="connexion.php">Connexion</a></li>
-		 <li style="float:right"><a href="inscription.php">Inscription</a></li>
+		$header.=  '<ul>
+			<li><a href="index.php">Accueil</a></li>
+			<li><a href="#propos">À propos</a></li>
+			<li><a href="#contact">Contact</a></li>
+			<li style="float:right"><a href="connexion.php">Connexion</a></li>
+			<li style="float:right"><a href="inscription.php">Inscription</a></li>
 		</ul><div id="bodyofbody">';
 	}
 	
@@ -176,49 +184,7 @@ function FormValidator(){
 
 	return $form;
 }
-/*function NavBootstrap($title){
-	$header='
-	<!DOCTYPE html>
-	<html lang="fr">
-	<head>
-		<title>'.$title.'</title>
-		<meta charset="utf-8">
-	  <link rel="stylesheet" type="text/css" href="/style/style.css">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	<style>
-  		.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
-  		{
-   			 background-color: #8064A2 !important;
-   		}
-   		.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited 
-  		{
-   			 border-color: green !important;
-   		}
-
-    	 .btn-primary:active 
-    	{
-   		 	 background-color: yellow !important;
-		}
-		ul, li, a {
-			list-style: none;
-		}
-	</style>
-	</head>
-	<body>
-	<h1>Validator</h1>
-
-	<ul>
-	  <li><a href="index.php">Accueil</a></li>
-	  <li><a href="#propos">À propos</a></li>
-	  <li><a href="#contact">Contact</a></li>
-	  <li style="float:right"><a href="connexion.php">Connexion</a></li>
-	  <li style="float:right"><a href="inscription.php">Inscription</a></li>
-	</ul><div id="bodyofbody">';
-	return $header;
-}*/
 function FormInscription(){
 	$form = '<form action="inscription.php" method="post" >
 		<div class="container ">
@@ -338,6 +304,7 @@ function verifUser($login,$password){
 	}
 
 }
+
 //fonction qui genere une clé aleatoire
 function random_key($length=20){
   $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -348,5 +315,59 @@ function random_key($length=20){
   return $string;
 }
 
+function verifkey($key){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request =  ("SELECT count(*) FROM user WHERE key_chiffrement='$key'");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	while ($row = $verification -> fetch_array(MYSQLI_NUM)) {
+		if($row[0] == 1){
+			return True;
+		}
+	}
+}
+function CompteReady($key){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request =  ("UPDATE user SET compte_valide = 1 WHERE key_chiffrement='$key'");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	if($verification){
+		return True;
+	}
+}
+function DeleteCompte($key){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request =  ("DELETE FROM user WHERE key_chiffrement='$key'");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	if($verification){
+		return True;
+	}
+}
+function DeleteUser($session){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request=("DELETE FROM user WHERE id_user='$session'");
+	$verification = $ConnexionBDD->getResults($conn,$request);
+	if($verification){
+		return True;
+	}
+}
+function user_validated($login,$password){
 
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	 
+	$request=("SELECT compte_valide FROM user WHERE login_user='$login' AND mdp_user='$password'");
+	$result = $ConnexionBDD->getResults($conn,$request);
+	while ($row = $result -> fetch_array(MYSQLI_NUM)) {
+		if($row[0]==1){
+			return True;
+		}
+	}
+}
 ?>
