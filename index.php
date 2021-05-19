@@ -17,6 +17,7 @@
 	$FormValidator = New FormValidator($_POST["formtype"],$_POST["url"],$_POST["warning"]);// Appel de la class
 	$url = $FormValidator->GetUrl();//utilisation de ces fonctions
 	$FormCheck = $FormValidator->CehckForm();//utilisation de ces fonctions
+	$date = date('Y-m-d H:i:s');
 	}
 	if($FormCheck != 'TRUE'){
 		if (!empty($FormCheck)) {
@@ -26,7 +27,11 @@
 		}
 		
 	}
-	else{//si non l'API corrige les pages
+	else{
+		if (!empty($_SESSION['id_user'])) {
+			Historique($_SESSION['id_user'],$url,$date);
+		}
+	//si non l'API corrige les pages
 		//$url = 'http://mygame.alwaysdata.net/';
 		$Taburl = getTabUrl($url);
 		//var_dump($Taburl);

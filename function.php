@@ -370,4 +370,37 @@ function user_validated($login,$password){
 		}
 	}
 }
+function Historique($id_user,$url,$date){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le login n'existe pas 
+	$request =  ("INSERT INTO `historique`(id_historique,id_user,lien,`date`)
+              VALUES (NULL,'$id_user','$url','$date')");
+	$insert = $ConnexionBDD->getResults($conn,$request);
+	if($insert){
+		return TRUE;
+	}
+}
+function SeeHistorique($id_user){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le mail entre n'existe pas dans la base de données 
+	$request_mail = ("SELECT date,lien FROM historique WHERE id_user='$id_user'");
+	$verification_mail = $ConnexionBDD->getResults($conn,$request_mail);
+	while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
+		 for ($i=0; $i <sizeof($row) ; $i++) { 
+			echo $row[$i].'	 ';
+		}
+	}
+}
+function DeleteHistorique($id_user){
+	$ConnexionBDD = New ConnexionBDD ('mysql-validator.alwaysdata.net','validator_data','validator','wasef01*');
+	$conn = $ConnexionBDD->OpenCon();
+	// Verifie que le login n'existe pas 
+	$request =  ("DELETE FROM `historique` WHERE id_user='$id_user'");
+	$delete = $ConnexionBDD->getResults($conn,$request);
+	if($delete){
+		return TRUE;
+	}
+}
 ?>
