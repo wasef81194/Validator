@@ -33,7 +33,7 @@ class URLS{
 			if (!preg_match("/#/", $url)) {
 				if (!preg_match("/@/", $url))
 					{
-						if (!preg_match("/css/", $url))
+						if (!preg_match("/.css/", $url))
 						{
 							return True;
 						}
