@@ -116,7 +116,7 @@ echo Footer();
                             if(data.check.inscriptionOk){
                                 $('.Messages').append(`
                                     <div class="alert alert-success text-center mt-4" role="alert">
-                                       	Un mail vous à été envoyer pour confirmez votre vompte. merci de cliquer sue lien envoyer.
+                                       	Un mail vous à été envoyé pour confirmez votre vompte. Merci de cliquer sur le lien envoyer.
                                     </div>
                                 `);
                                 $('#formInscription')[0].reset();

@@ -1,6 +1,7 @@
 <?php 
 include_once './class/bdd/connexionbdd.php';
-	$Logs = New Logs('à été déconnecter ');
+include_once './class/logs/logs.php';
+	$Logs=New Logs('à été déconnecter');
 	$Logs->SaveLogs();
 	$_SESSION = array();
 	session_destroy();

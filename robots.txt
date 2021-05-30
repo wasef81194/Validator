@@ -1,0 +1,12 @@
+# Group 1
+User-agent: *
+Disallow: /class/
+Disallow: /getconnexion.php/
+Disallow: /getinscription.php/
+Disallow: /deconnexion.php/
+Disallow: /delet_user.php/
+Disallow: /function.php/
+Disallow: /validecompte.php/
+
+
+Sitemap: https://validator.alwaysdata.net/sitemap.xml

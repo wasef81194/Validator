@@ -40,8 +40,12 @@ function smtpmailer($to, $nom, $prenom, $key)
 	$heure = date('H')+1;
 	$date = date('Y-m-d|'.$heure.':i:s');
 	$sujet = 'Bienvenue sur Validator';
-	$body = 'Bonjour '.$nom.' '.$prenom.', <br> Bienvenu sur Validator ! il te manque plus qu\'une étape avant de pouvoir te connecter. Click sur le lien ci dessous et tu pourra envin avoir accées à ton esapce membre. Attention ! ce lien expire à '.$date.'<br>
-	Lien : https://validator.alwaysdata.net/validecompte.php?key='.$key.'&date='.$date;
+	$body = 'Bonjour '.$nom.' '.$prenom.', <br> Nous sommes heureux de te voir parmi nous! Pour commencer tu dois confirmer ton compte. Cliques juste sur le lien&nbsp;ci-dessous. Attention ! ce lien expire le '.$date.'<br>
+	Lien : https://validator.alwaysdata.net/validecompte.php?key='.$key.'&date='.$date;'<br>
+	Si tu as des questions, reponds juste à ce mail—On sera heureux de te répondre.<br>
+	A très bientôt,<br>
+	L\'équipe Validator.';
+
 	$mail->Subject = $sujet;			// Le sujet de l'email
 	$mail->Body    = $body;		// Le contenu du mail en HTML
 	$mail->AltBody = $body;	// Le contenu du mail au format texte
@@ -139,9 +143,9 @@ function Nav($title){
 	if (!empty($_SESSION['id_user'])) {
 		$header.= '<ul>
 		<li><a href="index.php">Accueil</a></li>
-		<li><a href="#propos">À propos</a></li>
-		<li><a href="#contact">Contact</a></li>
 		<li><a href="pageProfile.php">Profil</a></li>
+		<li><a href="Apropos.php">À propos</a></li>
+		<li><a href="contact.php">Contact</a></li>
 		<li style="float:right"><a href="deconnexion.php">Déconnexion</a></li>
 		<li style="float:right"><a href="delet_user.php">Me désinscrire</a></li>
 		</ul><div id="bodyofbody">';
@@ -149,8 +153,8 @@ function Nav($title){
 	else{
 		$header.=  '<ul>
 			<li><a href="index.php">Accueil</a></li>
-			<li><a href="#propos">À propos</a></li>
-			<li><a href="#contact">Contact</a></li>
+			<li><a href="Apropos.php">À propos</a></li>
+			<li><a href="contact.php">Contact</a></li>
 			<li style="float:right"><a href="connexion.php">Connexion</a></li>
 			<li style="float:right"><a href="inscription.php">Inscription</a></li>
 		</ul><div id="bodyofbody">';
@@ -159,12 +163,16 @@ function Nav($title){
 	return $header;
 }
 function Footer(){
+
 	$footer='</div>
-	<footer><p>© 2021 - WASEF Alexandra & BELHOCINE Thilleli</p></footer>
-	
-	</body>
-	</html>
-	';
+	<footer class="page-footer font-small blue pt-4">
+		  <!-- Copyright -->
+		  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+		    <a href="http://validator.alwaysdata.net/">WASEF Alexandra & BELHOCINE Thilleli-validator.alwaysdata.net</a>
+		  </div>
+		  <!-- Copyright -->
+
+	</footer>';
 	return $footer;
 }
 
@@ -389,7 +397,13 @@ function SeeHistorique($id_user){
 	$verification_mail = $ConnexionBDD->getResults($conn,$request_mail);
 	while ($row = $verification_mail -> fetch_array(MYSQLI_NUM)) {
 		 for ($i=0; $i <sizeof($row) ; $i++) { 
-			echo $row[$i].'	 ';
+		 	if ($i%2) {
+		 		echo $row[$i].'	 <br><br>';
+		 	}
+		 	else{
+		 		echo '<code>'.$row[$i].'</code> &nbsp;&nbsp;&nbsp;&nbsp;';
+		 	}
+			
 		}
 	}
 }

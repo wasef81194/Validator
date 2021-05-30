@@ -12,8 +12,8 @@ if(isset($_SESSION["id_user"])){
 	$_SESSION = array();
 	session_destroy();
 
-	header('Location: index.php?msg=1')
-	$Logs = New Logs('c\'est désinscrit du site');
+	header('Location: index.php?msg=1');
+	$Logs=New Logs('c\'est désinscrit du site');
 	$Logs->SaveLogs();
 	if($_GET['msg'] == 1) {
 	echo "Vous vous êtes bien désinscrit de notre site";

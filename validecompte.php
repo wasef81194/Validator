@@ -18,27 +18,27 @@ if (!empty($_GET['key'])) {
 			if(CompteReady($key)){
 				$Logs = New Logs('à valider son adresse mail');
 				$Logs->SaveLogs();
-				echo '<div class="alert alert-success text-center mt-4" role="alert"> Bravo ! Votre mail à été confirmer vous pouvez désormer vous connecter </div>';
+				echo '<div class="alert alert-success text-center mt-4" role="alert"> Bravo ! Votre mail a été confirmé vous pouvez désormais vous connecter </div>';
 				header('refresh:5;url=connexion.php');
 
 			}
 		}
 		else{
-			$Logs = New Logs('à dépasser le temps impartie pour valider son adresse mail');
+			$Logs = New Logs('a dépassé le temps impartie pour valider son adresse mail');
 			$Logs->SaveLogs();
 			DeleteCompte($key);
-			echo '<div class="alert alert-danger text-center mt-4" role="alert"> Date expirer</div>';
+			echo '<div class="alert alert-danger text-center mt-4" role="alert"> la date a expiré</div>';
 		}
 	}	
 	else{
-		$Logs = New Logs('à entrer une clé incorrect pour valider son adresse mail');
+		$Logs = New Logs('a entré une clé incorrect pour valider son adresse mail');
 		$Logs->SaveLogs();
-		echo ' <div class="alert alert-danger text-center mt-4" role="alert"> Votre clé n\'éxiste pas</div>';
+		echo ' <div class="alert alert-danger text-center mt-4" role="alert"> Votre clé n\'existe pas</div>';
 	}
 
 }
 else {
-	$Logs = New Logs('n\'à  pas entrer de clé pour valider son adresse mail');
+	$Logs = New Logs('n\'a  pas entré de clé pour valider son adresse mail');
 	$Logs->SaveLogs();
 	echo '<div class="alert alert-danger text-center mt-4" role="alert">Erreur</div>';
 }

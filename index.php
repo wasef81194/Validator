@@ -47,7 +47,7 @@
 		//---------------------------------------------------------------------------------------------------CSS--------------------------------------------------------------------------------------------
 			$UrlValid = $URLS->ValideURL();
 			if ($UrlValid) {
-				$Logs = New Logs('à fait vérifier les erreurs CSS de la page '.$URLS->GetURL() );
+				$Logs = New Logs('a fait vérifier les erreurs CSS de la page '.$URLS->GetURL() );
 				$Logs->SaveLogs();
 				echo "<h2><b>La page à corriger : </b>". $URLS->GetURL()."</h2>";
 				if ($x == 0) {//CSS Verfier seulement sur la premier page pour plus de performance
@@ -75,7 +75,7 @@
 						}
 						if ($FormValidator->CheckWarningCSS()) {
 							for ($i=0; $i <$warningcount; $i++) {
-								$Logs = New Logs('à fait vérifier les avertissement CSS de la page '.$URLS->GetURL() );
+								$Logs = New Logs('a fait vérifier les avertissement CSS de la page '.$URLS->GetURL() );
 								$Logs->SaveLogs();
 
 								$line = CheckValue($data["cssvalidation"]["warnings"][$i]['line']);
@@ -92,7 +92,7 @@
 			   	//Recupere l'API  du site W3C en JSON  // j'ai mis mon site http://yourgame.alwaysdata.net-
 					//echo "<h3>Dans le code HTML :</h3>";
 					$APIHTML = $URLS->GetURLValidatorHTML();
-					$Logs = New Logs('à fait vérifier les erreurs HTML de la page '.$URLS->GetURL() );
+					$Logs = New Logs('a fait vérifier les erreurs HTML de la page '.$URLS->GetURL() );
 					$Logs->SaveLogs();
 					$options = array(
 					  'http'=>array(
@@ -127,10 +127,21 @@
 							echo '<div class = "containerred">'.$ErrorHTML.'</div>';
 						}
 					}
+			
 			}
 
 		}
+		echo '<form>
+				  <center><input id="impression" name="impression" class="btn btn-primary" type="button" onclick="imprimer_page()" value="Imprimer cette page" /></center>
+				</form>';
 	}
+	?>
+	<script>
+	function imprimer_page(){
+	  window.print();
+	}
+</script>
+	<?php 
 	echo Footer();
 
 

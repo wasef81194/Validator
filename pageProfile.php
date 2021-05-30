@@ -3,10 +3,8 @@
 include_once 'function.php';
 include_once './class/bdd/connexionbdd.php';
 include_once './class/connexion/formconnexion.php';
-//require_once('style/style.css');
 
 //----------------------------------------------------------------------------------------------
-//echo Nav('Connexion');
 
 if(isset($_SESSION["id_user"])){
 	//Recuperer les informations de l'utilisateur
@@ -46,38 +44,33 @@ if(isset($_SESSION["id_user"])){
  }
  ?>
 
-
- 	<div class="leftside-menu">
 		<div class="card">
 		  <div class="card-body">
-		  	<form method="post" id="Edit">
-		    <h4 class="card-title">Mes informations personnelles</h4>
+		    <h4 class="card-title"><strong>Mes informations personnelles:</strong></h4>
+		  		<center><img src="/style/profil.png"></center>
 		    <p class="card-text"><strong>Nom:</strong> <?= $nom; ?></p>
 		    <p class="card-text"><strong>Prénom:</strong> <?= $prenom; ?></p>
 		    <p class="card-text"><strong>Login:</strong> <?= $login; ?></p>
 		    <p class="card-text"><strong>Adresse mail:</strong> <?= $email; ?></p>
 		    <p class="card-text"><strong>Numéro de téléphone:</strong> 0<?= $PhoneNumber; ?></p>
-		    <input id="edit" name="edit" type="hidden" value="edit">
-		    <input  type="submit" id="edit" name="edit" class="btn btn-primary" value="Modifier mon profil">
-		    </form>
+	
 		  </div>
 		</div>
-	</div>
 
-	<div class="rightside-menu">
 		<div class="card">
 		  <div class="card-body">
-		    <h4 class="card-title">Historiques</h4>
+		    <h4 class="card-title"><strong>Historiques:</strong></h4>
 		    <form method="post" id="Delete">
 			<?php
-			echo '<p class="card-text">'.SeeHistorique($_SESSION["id_user"]).'<p>';?>
+			echo '<p>'.SeeHistorique($_SESSION["id_user"]).'</p>';?>
 
 		    <input id="delete" name="delete" type="hidden" value="delete">
 			<input  type="submit" id="delete" name="delete" class="btn btn-primary" value="Supprimer l'historique">
 			</form>
 		  </div>
 		</div>
-	</div>
+
+
 	
 	<?php
 
